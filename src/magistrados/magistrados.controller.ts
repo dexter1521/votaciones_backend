@@ -35,7 +35,7 @@ export class MagistradosController {
   }
 
   @Post()
-  @Auth(['admin'])
+  @Auth(['oficial_mayor', 'secretario_general', 'admin'])
   async create(@Body() createMagistradoDto: CreateMagistradoDto) {
     const m = await this.magistradosService.create(createMagistradoDto);
     return plainToInstance(MagistradoResponseDto, m, {

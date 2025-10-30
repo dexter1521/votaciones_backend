@@ -12,8 +12,8 @@ export class MagistradoResponseDto {
   nombre_completo: string;
 
   @Expose()
-  @ApiProperty({ example: 'Presidente' })
-  cargo: string;
+  @ApiProperty({ example: 'Presidente', required: false })
+  cargo?: string | null;
 
   @Expose()
   @ApiProperty({ example: true })

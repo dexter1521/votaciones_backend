@@ -14,8 +14,8 @@ export class Magistrado {
   @Column({ length: 150 })
   nombre_completo: string;
 
-  @Column({ length: 100 })
-  cargo: string;
+  @Column({ length: 100, nullable: true })
+  cargo?: string | null;
 
   @Column({ default: true })
   activo: boolean;

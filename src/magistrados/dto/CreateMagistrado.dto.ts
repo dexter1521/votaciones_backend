@@ -1,17 +1,30 @@
-import { IsNotEmpty, IsString, MaxLength, IsOptional, MinLength, IsBoolean } from 'class-validator';
+import {
+  IsString,
+  MaxLength,
+  IsOptional,
+  MinLength,
+  IsBoolean,
+} from 'class-validator';
+import { ApiPropertyOptional, ApiProperty } from '@nestjs/swagger';
 
 export class CreateMagistradoDto {
-  @IsNotEmpty()
+  @ApiProperty({ example: 'María Pérez' })
   @IsString()
-  @MinLength(3, { message: 'El nombre completo debe tener al menos 3 caracteres' })
-  @MaxLength(150, { message: 'El nombre completo no puede exceder 150 caracteres' })
+  @MinLength(3, {
+    message: 'El nombre completo debe tener al menos 3 caracteres',
+  })
+  @MaxLength(150, {
+    message: 'El nombre completo no puede exceder 150 caracteres',
+  })
   nombre_completo: string;
 
-  @IsNotEmpty()
+  @ApiPropertyOptional({ example: 'Presidente' })
+  @IsOptional()
   @IsString()
   @MaxLength(100, { message: 'El cargo no puede exceder 100 caracteres' })
-  cargo: string;
+  cargo?: string | null;
 
+  @ApiPropertyOptional({ example: true })
   @IsOptional()
   @IsBoolean()
   activo?: boolean = true;
