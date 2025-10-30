@@ -8,21 +8,21 @@ import {
 
 @Entity('magistrados')
 export class Magistrado {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'id_magistrado' })
   id_magistrado: number;
 
   @Column({ length: 150 })
   nombre_completo: string;
 
-  @Column({ length: 100, nullable: true })
+  @Column({ type: 'varchar', length: 100, nullable: true })
   cargo?: string | null;
 
-  @Column({ default: true })
+  @Column({ type: 'tinyint', width: 1, default: 1 })
   activo: boolean;
 
-  @CreateDateColumn({ name: 'creado_en' })
+  @CreateDateColumn({ name: 'creado_en', type: 'datetime' })
   creado_en: Date;
 
-  @UpdateDateColumn({ name: 'actualizado_en' })
+  @UpdateDateColumn({ name: 'actualizado_en', type: 'datetime' })
   actualizado_en: Date;
 }
