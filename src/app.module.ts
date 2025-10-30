@@ -7,6 +7,8 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MagistradosModule } from './magistrados/magistrados.module';
 import { PlenosModule } from './plenos/plenos.module';
+import { PuntosModule } from './puntos/puntos.module';
+import { VotosModule } from './votos/votos.module';
 
 @Module({
   imports: [
@@ -31,6 +33,8 @@ import { PlenosModule } from './plenos/plenos.module';
     AuthModule,
     MagistradosModule,
     PlenosModule,
+    PuntosModule,
+    VotosModule,
   ],
   controllers: [AppController],
   providers: [AppService],
