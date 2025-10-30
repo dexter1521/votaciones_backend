@@ -1,0 +1,31 @@
+📋 Resumen de mejoras implementadas:
+✅ Configuraciones mejoradas:
+Variables de entorno - Archivo .env.example creado
+JWT con expiración - Configuración más robusta
+CORS habilitado - Para frontend
+Validaciones mejoradas - Whitelist y transformaciones
+Serialización automática - Excluye passwords automáticamente
+✅ Entidad Usuario mejorada:
+Timestamps - createdAt y updatedAt
+Validaciones - Con decoradores de class-validator
+Exclusión de password - No se envía en respuestas JSON
+Constraints únicos - Usuario único
+✅ DTOs y validaciones:
+CreateUsuarioDto - Para crear usuarios con validaciones
+Validaciones de contraseña - Mínimo 6 caracteres
+Validaciones de rol - Solo admin/user
+✅ Sistema de roles:
+RolesGuard - Guard para verificar roles
+Decorador Auth mejorado - Soporta roles
+Endpoint protegido - Solo admins pueden crear usuarios
+✅ Servicios mejorados:
+Método create - Para crear usuarios
+Verificación de duplicados - No usuarios repetidos
+Selección de campos - No expone passwords
+🚀 Próximos pasos recomendados:
+Módulos de votación - Crear entidades para votos, candidatos, etc.
+Middleware de logging - Para auditoría
+Tests mejorados - Más cobertura
+Documentación API - Con Swagger
+Rate limiting - Protección contra ataques
+Validación de email - Si agregas emails
