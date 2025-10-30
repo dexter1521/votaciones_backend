@@ -9,6 +9,7 @@ import { MagistradosModule } from './magistrados/magistrados.module';
 import { PlenosModule } from './plenos/plenos.module';
 import { PuntosModule } from './puntos/puntos.module';
 import { VotosModule } from './votos/votos.module';
+import { AsistenciasModule } from './asistencias/asistencias.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { VotosModule } from './votos/votos.module';
     PlenosModule,
     PuntosModule,
     VotosModule,
+    AsistenciasModule,
   ],
   controllers: [AppController],
   providers: [AppService],

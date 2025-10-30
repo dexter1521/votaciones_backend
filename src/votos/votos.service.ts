@@ -1,4 +1,8 @@
-import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  ConflictException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Voto } from './voto.entity';
@@ -23,32 +27,55 @@ export class VotosService {
 
   async create(dto: CreateVotoDto) {
     // comprobar existencia de entidades relacionadas
-    const exPunto = await this.puntoRepo.exist({ where: { id_punto: dto.id_punto } });
+    const exPunto = await this.puntoRepo.exist({
+      where: { id_punto: dto.id_punto },
+    });
     if (!exPunto)
       throw new NotFoundException(
-        buildNotFound('PUNTO_NOT_FOUND', 'Punto asociado no encontrado', { id_punto: dto.id_punto }),
+        buildNotFound('PUNTO_NOT_FOUND', 'Punto asociado no encontrado', {
+          id_punto: dto.id_punto,
+        }),
       );
 
-    const exMag = await this.magistradoRepo.exist({ where: { id_magistrado: dto.id_magistrado } });
+    const exMag = await this.magistradoRepo.exist({
+      where: { id_magistrado: dto.id_magistrado },
+    });
     if (!exMag)
       throw new NotFoundException(
-        buildNotFound('MAGISTRADO_NOT_FOUND', 'Magistrado asociado no encontrado', { id_magistrado: dto.id_magistrado }),
+        buildNotFound(
+          'MAGISTRADO_NOT_FOUND',
+          'Magistrado asociado no encontrado',
+          { id_magistrado: dto.id_magistrado },
+        ),
       );
 
-    const exCat = await this.catalogoRepo.exist({ where: { id_voto_catalogo: dto.id_voto_catalogo } });
+    const exCat = await this.catalogoRepo.exist({
+      where: { id_voto_catalogo: dto.id_voto_catalogo },
+    });
     if (!exCat)
       throw new NotFoundException(
-        buildNotFound('CATALOGO_NOT_FOUND', 'Voto de catálogo no encontrado', { id_voto_catalogo: dto.id_voto_catalogo }),
+        buildNotFound('CATALOGO_NOT_FOUND', 'Voto de catálogo no encontrado', {
+          id_voto_catalogo: dto.id_voto_catalogo,
+        }),
       );
 
     // comprobar voto duplicado (unique id_punto+id_magistrado)
-    const exists = await this.repo.exist({ where: { punto: { id_punto: dto.id_punto }, magistrado: { id_magistrado: dto.id_magistrado } } });
+    const exists = await this.repo.exist({
+      where: {
+        punto: { id_punto: dto.id_punto },
+        magistrado: { id_magistrado: dto.id_magistrado },
+      },
+    });
     if (exists)
       throw new ConflictException(
-        buildConflict('VOTO_DUPLICADO', 'Voto duplicado para el punto y magistrado indicados', {
-          id_punto: dto.id_punto,
-          id_magistrado: dto.id_magistrado,
-        }),
+        buildConflict(
+          'VOTO_DUPLICADO',
+          'Voto duplicado para el punto y magistrado indicados',
+          {
+            id_punto: dto.id_punto,
+            id_magistrado: dto.id_magistrado,
+          },
+        ),
       );
 
     const v: any = this.repo.create();
@@ -64,8 +91,14 @@ export class VotosService {
   }
 
   async findOne(id: number) {
-    const v = await this.repo.findOne({ where: { id_voto: id }, relations: ['punto', 'magistrado'] });
-    if (!v) throw new NotFoundException(buildNotFound('VOTO_NOT_FOUND', 'Voto no encontrado', { id_voto: id }));
+    const v = await this.repo.findOne({
+      where: { id_voto: id },
+      relations: ['punto', 'magistrado'],
+    });
+    if (!v)
+      throw new NotFoundException(
+        buildNotFound('VOTO_NOT_FOUND', 'Voto no encontrado', { id_voto: id }),
+      );
     return v;
   }
 
